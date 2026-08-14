@@ -348,4 +348,17 @@ See [wasm/README.md](wasm/README.md) for the full API reference and browser test
 
 ## Test vectors
 
-Algorithm golden vectors: [`tests/vectors/`](tests/vectors/). BIP-360 P2MR construction: [`tests/vectors/p2mr/`](tests/vectors/p2mr/).
+This repo carries two kinds of shared test data. They look related (both sit
+under `tests/vectors/`) but they answer different questions.
+
+**Signature algorithms** (Schnorr, ML-DSA-44, SLH-DSA-SHA2-128s): known-good
+keys, messages, and signatures for sign/verify tests. You edit the JSON under
+`tests/vectors/fixtures/`; a script regenerates the Rust, Python, JavaScript,
+and C copies so every language sees the same bytes. Details:
+[`tests/vectors/README.md`](tests/vectors/README.md).
+
+**P2MR construction** (BIP 360): given a script tree, what merkle root,
+`scriptPubKey`, bech32m address, and control blocks should you get? That data
+is plain JSON under `tests/vectors/p2mr/fixtures/`. Every language loads those
+files from that one directory (no generate step). Details:
+[`tests/vectors/p2mr/README.md`](tests/vectors/p2mr/README.md).

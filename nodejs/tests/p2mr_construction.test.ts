@@ -180,26 +180,24 @@ function runVector(v: any): void {
   }
 }
 
+function runFixture(name: string): void {
+  const raw = fs.readFileSync(path.join(FIXTURES, name), "utf8");
+  const data = JSON.parse(raw);
+  expect(data.version).toBe(1);
+  expect(data.test_vectors.length).toBeGreaterThan(0);
+  for (const v of data.test_vectors) {
+    runVector(v);
+  }
+}
+
 describe("P2MR construction vectors", () => {
   test("p2mr_construction.json", () => {
-    const raw = fs.readFileSync(
-      path.join(FIXTURES, "p2mr_construction.json"),
-      "utf8"
-    );
-    const data = JSON.parse(raw);
-    expect(data.version).toBe(1);
-    for (const v of data.test_vectors) {
-      runVector(v);
-    }
+    runFixture("p2mr_construction.json");
   });
 
-  test("p2mr_pqc_construction.json is preserved", () => {
-    const raw = fs.readFileSync(
-      path.join(FIXTURES, "p2mr_pqc_construction.json"),
-      "utf8"
-    );
-    const data = JSON.parse(raw);
-    expect(data.version).toBe(1);
-    expect(data.test_vectors.length).toBeGreaterThan(0);
+  // Same full expected-value checks as classic (leaf hashes, merkle root,
+  // scriptPubKey, bech32m address, control blocks including leafVersion).
+  test("p2mr_pqc_construction.json", () => {
+    runFixture("p2mr_pqc_construction.json");
   });
 });

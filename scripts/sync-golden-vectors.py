@@ -1,5 +1,22 @@
 #!/usr/bin/env python3
-"""Regenerate golden-vector artifacts from canonical JSON fixtures in tests/vectors/fixtures/."""
+"""Rebuild language-specific signature test-vector files from JSON.
+
+Edit only the JSON under tests/vectors/fixtures/. This script reads those
+files and overwrites the generated copies used by each language's tests:
+
+  tests/vectors/rust/
+  tests/vectors/python/
+  tests/vectors/nodejs/
+  tests/vectors/wasm/
+  $LIBBITCOINPQC_SRC/tests/vectors/*.h   (C headers for libbitcoinpqc)
+
+Do not hand-edit the generated files; change the JSON and re-run this script
+(or `just vectors-in-sync` / `make sync-vectors`).
+
+This path is only for signature algorithm test data (Schnorr, ML-DSA,
+SLH-DSA). It does not touch BIP 360 P2MR construction fixtures under
+tests/vectors/p2mr/.
+"""
 
 from __future__ import annotations
 

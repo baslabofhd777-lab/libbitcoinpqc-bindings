@@ -260,7 +260,7 @@ def encode(hrp, witver, witprog):
 
 
 #
-# BIP-360 Test Code
+# BIP 360 Test Code
 #
 def collect_leaf_hashes(tree: ScriptTree) -> List[bytes]:
     """Recursively collect leaf hashes in order (for verification)"""
@@ -325,7 +325,7 @@ def extract_test_data(v: Dict[str, Any]) -> Dict[str, Any]:
 
 def run_single_test(v: Dict[str, Any], test_num: int) -> bool:
     """Run a single test vector. Returns True if passed."""
-    print(f"\nBIP-360 Test Vector {test_num}\n{'-' * 25}")
+    print(f"\nBIP 360 Test Vector {test_num}\n{'-' * 25}")
 
     v = extract_test_data(v)
 
@@ -429,12 +429,12 @@ def load_construction_vectors(path: Optional[str] = None) -> list:
 
 
 def BIP360_tests(fixture_path: Optional[str] = None) -> int:
-    """Run BIP-360 P2MR construction test vectors. Returns number of failures."""
+    """Run BIP 360 P2MR construction test vectors. Returns number of failures."""
     print("\nRunning BIP-0360 Pay-to-Merkle-Root (P2MR) Tests...")
 
     test_vectors = load_construction_vectors(fixture_path)
     passed = sum(run_single_test(v, i + 1) for i, v in enumerate(test_vectors))
-    print(f"\n{passed}/{len(test_vectors)} BIP-360 tests passed successfully.")
+    print(f"\n{passed}/{len(test_vectors)} BIP 360 tests passed successfully.")
     return len(test_vectors) - passed
 
 

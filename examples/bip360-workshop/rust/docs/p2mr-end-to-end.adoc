@@ -69,7 +69,7 @@ The following depicts the construction of a P2MR _TapTree_ and computation its _
 image::images/p2mr_construction.png[]
 
 A P2MR address is created by adding locking scripts to leaves of a _TapTree_.
-The locking scripts can use either _Schnorr_ (as per BIP-360) or _SLH-DSA_ (defined in a future BIP) cryptography.
+The locking scripts can use either _Schnorr_ (as per BIP 360) or _SLH-DSA_ (defined in a future BIP) cryptography.
 
 . Set an environment variable specific to your Bitcoin network environment (regtest, signet, etc)
 +
@@ -113,7 +113,7 @@ SLH_DSA is quantum-resistant.  However, the trade-off is the much larger signatu
 +
 image::images/crypto_key_characteristics.png[]
 +
-NOTE: PQC cryptography is made available to this BIP-360 reference implementation via the link:https://crates.io/crates/bitcoinpqc[libbitcoinpqc Rust bindings].
+NOTE: PQC cryptography is made available to this BIP 360 reference implementation via the link:https://crates.io/crates/bitcoinpqc[libbitcoinpqc Rust bindings].
 
 .. If you set _MIXED_, then each leaf of the taptree will consist of *either* a Schnorr based locking script or a SLH-DSA based locking script.
 A _MIXED_ tap tree with 5 leaves (aka: TOTAL_LEAF_COUNT) could be represented as follows:

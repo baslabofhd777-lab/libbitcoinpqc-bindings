@@ -1,7 +1,7 @@
 
 # p2mr test vectors
 
-This rust project contains the test vectors for BIP-360
+This rust project contains the test vectors for BIP 360
 
 
 ## Run Test Vectors

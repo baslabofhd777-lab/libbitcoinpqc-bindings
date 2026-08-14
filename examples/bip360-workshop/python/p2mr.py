@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Union
 import binascii
 import hashlib
 import json
+import os
 
 
 class Encoding(Enum):
@@ -259,7 +260,7 @@ def encode(hrp, witver, witprog):
 
 
 #
-# BIP-360 Test Code
+# BIP 360 Test Code
 #
 def collect_leaf_hashes(tree: ScriptTree) -> List[bytes]:
     """Recursively collect leaf hashes in order (for verification)"""
@@ -324,7 +325,7 @@ def extract_test_data(v: Dict[str, Any]) -> Dict[str, Any]:
 
 def run_single_test(v: Dict[str, Any], test_num: int) -> bool:
     """Run a single test vector. Returns True if passed."""
-    print(f"\nBIP-360 Test Vector {test_num}\n{'-' * 25}")
+    print(f"\nBIP 360 Test Vector {test_num}\n{'-' * 25}")
 
     v = extract_test_data(v)
 
@@ -412,15 +413,23 @@ def run_single_test(v: Dict[str, Any], test_num: int) -> bool:
         return False
 
 
+def default_fixtures_dir() -> str:
+    """Living P2MR construction fixtures (repo tests/vectors/p2mr/fixtures/)."""
+    # examples/bip360-workshop/python/p2mr.py → repo root
+    root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+    return os.path.join(root, "tests", "vectors", "p2mr", "fixtures")
+
+
 def BIP360_tests() -> None:
-    """Run all BIP-360 Test Vectors."""
+    """Run all BIP 360 Test Vectors."""
     print("\nRunning BIP-0360 Pay-to-Merkle-Root (P2MR) Tests...")
 
-    with open("../common/tests/data/p2mr_construction.json", "r") as f:
+    path = os.path.join(default_fixtures_dir(), "p2mr_construction.json")
+    with open(path, "r", encoding="utf-8") as f:
         test_vectors = json.load(f)["test_vectors"]
 
     passed = sum(run_single_test(v, i + 1) for i, v in enumerate(test_vectors))
-    print(f"\n{passed}/{len(test_vectors)} BIP-360 tests passed successfully.")
+    print(f"\n{passed}/{len(test_vectors)} BIP 360 tests passed successfully.")
 
 
 if __name__ == "__main__":

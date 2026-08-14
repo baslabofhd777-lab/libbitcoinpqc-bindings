@@ -1,6 +1,6 @@
 # libbitcoinpqc-bindings — release 0.4.1 plan (revised)
 
-Consolidated plan for the **wasm-tests** polish pass, plus **BIP-360 P2MR multi-language e2e** sourced from [bitcoin/bips#2202](https://github.com/bitcoin/bips/pull/2202) (notmike-5). Incorporates review of repo-root [`plan.md`](plan.md).
+Consolidated plan for the **wasm-tests** polish pass, plus **BIP 360 P2MR multi-language e2e** sourced from [bitcoin/bips#2202](https://github.com/bitcoin/bips/pull/2202) (notmike-5). Incorporates review of repo-root [`plan.md`](plan.md).
 
 **Canonical bindings home:** [jbride/libbitcoinpqc-bindings](https://github.com/jbride/libbitcoinpqc-bindings)  
 (Local `origin` may be a `cryptoquick` fork; publish/docs URLs use **jbride**.)
@@ -15,7 +15,7 @@ Ship **0.4.1** so notmike-5 can remove ref-impl from [BIPs PR #2202](https://git
 
 | Source (PR #2202) | Preserve into bindings | Extend for our work |
 |-------------------|------------------------|---------------------|
-| `common/tests/data/*.json` | **First-class living vectors** under `tests/vectors/p2mr/fixtures/` | Same JSON informs Python / Rust / Node / WASM e2e; update here when BIP-360 construction semantics change |
+| `common/tests/data/*.json` | **First-class living vectors** under `tests/vectors/p2mr/fixtures/` | Same JSON informs Python / Rust / Node / WASM e2e; update here when BIP 360 construction semantics change |
 | `python/p2mr.py` | **Copy** into Python binding tree | Point at shared fixtures; wire CI tests; align with current `bitcoinpqc` Python API where scripts/signatures meet |
 | `rust/` p2mr construction + pqc construction tests / helpers | **Copy** into Rust binding tree (tests + any support modules) | Drop/private-registry-gate non-hermetic deps for default CI; extend to use **this** crate’s `bitcoinpqc` (0.4.x, SLH-DSA-SHA2, three algos) instead of kellnr `bitcoinpqc` 0.3.0 |
 | `js/` p2mr example + wasm smoke | **Copy** into Node/WASM binding trees | Retarget unscoped **`bitcoinpqc`** / `bitcoinpqc/wasm` **0.4.x**; replace SHAKE naming with SHA2 where still present; drive shared construction fixtures |
@@ -129,7 +129,7 @@ tests/vectors/
   python/                   # generated *_golden_vectors.py
   nodejs/                   # generated *.js + *.d.ts
   wasm/                     # generated *.js
-  p2mr/                     # Part D — living BIP-360 construction vectors (not sync-golden-vectors)
+  p2mr/                     # Part D — living BIP 360 construction vectors (not sync-golden-vectors)
     README.md               # provenance (PR #2202 SHA), how languages consume them
     fixtures/
       p2mr_construction.json
@@ -195,7 +195,7 @@ Docs after publish:
 
 **BIPs paste (correct owner):**
 
-> Algorithm integration tests and golden vectors for BIP-360 tapscript signature algorithms (secp256k1 Schnorr, ML-DSA-44, SLH-DSA-SHA2-128s), plus P2MR construction e2e, live in [jbride/libbitcoinpqc-bindings `tests/vectors/`](https://github.com/jbride/libbitcoinpqc-bindings/tree/main/tests/vectors) (path after merge to main).
+> Algorithm integration tests and golden vectors for BIP 360 tapscript signature algorithms (secp256k1 Schnorr, ML-DSA-44, SLH-DSA-SHA2-128s), plus P2MR construction e2e, live in [jbride/libbitcoinpqc-bindings `tests/vectors/`](https://github.com/jbride/libbitcoinpqc-bindings/tree/main/tests/vectors) (path after merge to main).
 
 Tag `v0.4.1` if that matches how 0.4.0 was released.
 
@@ -205,7 +205,7 @@ Tag `v0.4.1` if that matches how 0.4.0 was released.
 
 **Urgency:** [bitcoin/bips#2202](https://github.com/bitcoin/bips/pull/2202) will drop this tree soon. Snapshot **must** land here first. Pull PR head via `gh` (or user-provided tarball) at implement time; record **PR number + commit SHA** in `tests/vectors/p2mr/README.md`.
 
-**These are real test vectors** — not disposable demo data. They live under `tests/vectors/p2mr/` and continue to inform construction + multi-lang e2e as BIP-360 evolves. Algorithm goldens (`fixtures/` for secp/ML/SLH) stay separate; P2MR construction is the script-tree / control-block layer on top.
+**These are real test vectors** — not disposable demo data. They live under `tests/vectors/p2mr/` and continue to inform construction + multi-lang e2e as BIP 360 evolves. Algorithm goldens (`fixtures/` for secp/ML/SLH) stay separate; P2MR construction is the script-tree / control-block layer on top.
 
 ### D.0 Snapshot inventory (copy everything that matters)
 

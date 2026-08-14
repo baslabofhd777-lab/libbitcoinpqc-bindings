@@ -14,7 +14,9 @@ use p2mr_ref::{create_p2mr_utxo};
 //  This file contains tests that execute against the BIP360 script-path-only test vectors.
 
 static TEST_VECTORS: Lazy<TestVectors> = Lazy::new(|| {
-    let bip360_test_vectors = include_str!("../../common/tests/data/p2mr_construction.json");
+    // Living SoT: repo tests/vectors/p2mr/fixtures/ (not a workshop-local copy).
+    let bip360_test_vectors =
+        include_str!("../../../../tests/vectors/p2mr/fixtures/p2mr_construction.json");
     let test_vectors: TestVectors = serde_json::from_str(bip360_test_vectors).unwrap();
     assert_eq!(test_vectors.version, 1);
     test_vectors

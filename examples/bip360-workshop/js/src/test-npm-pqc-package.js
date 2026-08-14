@@ -2,9 +2,9 @@
 
 /**
  * Node.js test script for Bitcoin PQC WASM module (High-Level API)
- * 
+ *
  * Usage: node test-npm-package.js
- * 
+ *
  * This script tests the high-level TypeScript wrapper API (index.js) from the
  * command line, which provides a cleaner interface than the low-level API.
  */
@@ -142,7 +142,7 @@ async function testAlgorithm(algorithm, name) {
 async function runTests() {
     console.log('Bitcoin PQC Library Example (Node.js - High-Level API)');
     console.log('======================================================\n');
-    console.log('This example tests the post-quantum signature algorithms designed for BIP-360 and the Bitcoin QuBit soft fork.');
+    console.log('This example tests the post-quantum signature algorithms designed for BIP 360 and the Bitcoin QuBit soft fork.');
     console.log('Using the high-level TypeScript wrapper API (index.js).\n');
 
     // Initialize the module

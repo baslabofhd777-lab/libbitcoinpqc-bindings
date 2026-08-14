@@ -7,7 +7,7 @@
 
 :numbered:
 
-Welcome to the BIP-360 / _Pay-To-Tap-Script-Hash_ (P2MR) workshop !
+Welcome to the BIP 360 / _Pay-To-Tap-Script-Hash_ (P2MR) workshop !
 
 In this workshop, you will interact with a custom Signet environment to create, fund and spend from a _P2MR_ address.
 
@@ -15,7 +15,7 @@ _P2MR_ is a new Bitcoin address type defined in link:https://bip360.org/bip360.h
 
 
 In addition, this workshop allows for the (un)locking mechanism of the leaf scripts of your P2MR address to optionally use _Post Quantum Cryptography_ (PQC).
-The use of PQC is alluded to in BIP-360 and will be further defined in future BIPs.
+The use of PQC is alluded to in BIP 360 and will be further defined in future BIPs.
 
 The steps outlined in this workshop are executed using a P2MR/PQC enabled Bitcoin Core instance running on a signet environment.
 *The target audience of the workshop is Bitcoin developers and ops personnel.
@@ -83,7 +83,7 @@ bip360@0aa9edf3d201:~/bips/bip-0360/ref-impl/rust$ ls
 Cargo.lock  Cargo.toml  README.md  docs  examples  src  tests
 -----
 +
-As per the `ls` command seen above, your command prompt path defaults to the link:https://github.com/jbride/bips/tree/p2mr/bip-0360/ref-impl/rust[Rust based reference implementation] for BIP-360.
+As per the `ls` command seen above, your command prompt path defaults to the link:https://github.com/jbride/bips/tree/p2mr/bip-0360/ref-impl/rust[Rust based reference implementation] for BIP 360.
 
 ==== Container contents
 Your docker environment already includes a P2MR/PQC enabled `bitcoin-cli` utility.
@@ -99,8 +99,8 @@ declare -f b-cli
 You should see a response similar to the following:
 +
 -----
-b-cli () 
-{ 
+b-cli ()
+{
     /usr/local/bin/bitcoin-cli -rpcconnect=${RPC_CONNECT:-192.168.122.1} -rpcport=${RPC_PORT:-18443} -rpcuser=${RPC_USER:-signet} -rpcpassword=${RPC_PASSWORD:-signet} "$@"
 }
 -----
@@ -120,7 +120,7 @@ b-cli getblockcount
 . In addition, your docker environment also comes pre-installed with the following utilities needed for this workshop:
 
 . *jq*: json parsing utility
-. *awk* 
+. *awk*
 . *Rust* development environment with _cargo_ utility
 
 == Bitcoin Environment
@@ -145,7 +145,7 @@ The following depicts the construction of a P2MR _TapTree_ and computation its _
 image::images/p2mr_construction.png[]
 
 A P2MR address is created by adding locking scripts to leaves of a _TapTree_.
-The locking scripts can use either _Schnorr_ (as per BIP-360) or _SLH-DSA_ (defined in a future BIP) cryptography.
+The locking scripts can use either _Schnorr_ (as per BIP 360) or _SLH-DSA_ (defined in a future BIP) cryptography.
 
 . Define number of total leaves in tap tree :
 +
@@ -179,7 +179,7 @@ SLH_DSA is quantum-resistant.  However, the trade-off is the much larger signatu
 +
 image::images/crypto_key_characteristics.png[]
 +
-NOTE: PQC cryptography is made available to this BIP-360 reference implementation via the link:https://crates.io/crates/bitcoinpqc[libbitcoinpqc Rust bindings].
+NOTE: PQC cryptography is made available to this BIP 360 reference implementation via the link:https://crates.io/crates/bitcoinpqc[libbitcoinpqc Rust bindings].
 
 .. If you set _MIXED_, then each leaf of the taptree will consist of *either* a Schnorr based locking script or a SLH-DSA based locking script.
 A _MIXED_ tap tree with 5 leaves (aka: TOTAL_LEAF_COUNT) could be represented as follows:
@@ -195,7 +195,7 @@ A _CONCATENATED_SCHNORR_AND_SLH_DSA_ tap tree with 5 leaves (aka: TOTAL_LEAF_COU
 image::images/tap_tree_concatenated.png[p,300]
 
 . Set the tap leaf index to later use as the unlocking script (when spending) For example, to later spend from the 5th leaf of the tap tree:
-+ 
++
 [source,bash]
 -----
 export LEAF_TO_SPEND_FROM=4

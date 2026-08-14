@@ -1,8 +1,8 @@
-"""BIP-360 P2MR construction e2e against living vectors under tests/vectors/p2mr/.
+"""BIP 360 P2MR construction e2e against living vectors under tests/vectors/p2mr/.
 
-`p2mr_construction.json` is the shared multi-language bar (pure construction ref).
-`p2mr_pqc_construction.json` is preserved from BIPs PR #2202 for rust-bitcoin / workshop
-stacks; it is not required to pass the pure-Python ref in CI.
+Both `p2mr_construction.json` and `p2mr_pqc_construction.json` get the same full
+expected-value checks (leaf hashes, merkle root, scriptPubKey, address, control
+blocks / leafVersion).
 """
 
 from __future__ import annotations
@@ -43,18 +43,16 @@ class TestP2mrConstruction(unittest.TestCase):
         self.assertEqual(failed, [], f"failed vectors in {path.name}: {failed}")
 
     def test_p2mr_construction_json(self) -> None:
-        """Living multi-language construction vectors (must pass)."""
+        """Classic construction vectors (full expected-value checks)."""
         self._run_fixture(self.construction)
 
-    def test_p2mr_pqc_fixture_present(self) -> None:
-        """PQC construction JSON is preserved as living data (workshop / rust-bitcoin)."""
-        with self.pqc.open(encoding="utf-8") as f:
-            data = json.load(f)
-        self.assertEqual(data.get("version"), 1)
-        self.assertGreater(len(data["test_vectors"]), 0)
+    def test_p2mr_pqc_construction_json(self) -> None:
+        """PQC construction vectors (same full checks as classic)."""
+        self._run_fixture(self.pqc)
 
     def test_bip360_tests_helper(self) -> None:
         self.assertEqual(BIP360_tests(str(self.construction)), 0)
+        self.assertEqual(BIP360_tests(str(self.pqc)), 0)
 
 
 if __name__ == "__main__":

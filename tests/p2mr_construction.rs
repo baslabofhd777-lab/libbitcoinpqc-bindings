@@ -1,5 +1,9 @@
-//! Hermetic BIP-360 P2MR construction e2e against living vectors.
+//! Hermetic BIP 360 P2MR construction e2e against living vectors.
 //! Logic mirrors `python/p2mr/p2mr.py` (notmike-5 / bitcoin/bips#2202).
+//!
+//! Both `p2mr_construction.json` and `p2mr_pqc_construction.json` get full
+//! expected-value checks (leaf hashes, merkle root, scriptPubKey, address,
+//! control blocks / leafVersion), not presence-only.
 
 use serde_json::Value;
 use sha2::{Digest, Sha256};
@@ -349,13 +353,8 @@ fn p2mr_construction_vectors() {
 }
 
 #[test]
-fn p2mr_pqc_fixture_present() {
-    let path = fixtures_dir().join("p2mr_pqc_construction.json");
-    let raw = std::fs::read_to_string(&path).expect("pqc fixture present");
-    let data: Value = serde_json::from_str(&raw).expect("json");
-    assert_eq!(data["version"], 1);
-    assert!(data["test_vectors"]
-        .as_array()
-        .map(|a| !a.is_empty())
-        .unwrap_or(false));
+fn p2mr_pqc_construction_vectors() {
+    // Same full expected-value checks as classic (leaf hashes, merkle root,
+    // scriptPubKey, bech32m address, control blocks including leafVersion).
+    load_and_run("p2mr_pqc_construction.json");
 }
