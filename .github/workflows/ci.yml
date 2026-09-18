@@ -441,7 +441,7 @@ jobs:
       - name: Run benchmarks (informational)
         env:
           CI: true
-        run: cargo bench --features bench -- --noplot
+        run: cargo bench --features bench 
 
       - name: Upload criterion report
         uses: actions/upload-artifact@v4
